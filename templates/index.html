@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch To Go - Dit Personlige Streaming-Univers</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <header class="landing-header">
+        <div class="nav-logo">Watch To Go</div>
+        <a href="{{ url_for('login') }}" class="btn">Log Ind</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Minder om Plex, bare bedre.</h1>
+                <p class="subtitle">Glem alt om komplekse server-opsætninger. Upload op til 100 af dine egne film og serier, og stream dem hvor som helst – helt gratis og uden reklamer.</p>
+                <a href="{{ url_for('register') }}" class="btn btn-large">Opret din gratis konto nu</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="info-container">
+                <h2>Sådan virker det</h2>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>1. Upload</h3>
+                        <p>Træk og slip dine video-filer. Vi håndterer resten i baggrunden.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fas fa-magic-wand-sparkles"></i>
+                        <h3>2. Organiser</h3>
+                        <p>Vores system finder automatisk plakater, beskrivelser og organiserer dine TV-serier.</p>
+                    </div>
+                    <div class="step-card">
+                        <i class="fas fa-play-circle"></i>
+                        <h3>3. Stream</h3>
+                        <p>Nyd dit personlige bibliotek på enhver enhed med en webbrowser, hvor som helst.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="features-container">
+                <h2>Et Univers af Funktioner</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3><i class="fas fa-user-shield"></i> Dit Personlige Bibliotek</h3>
+                        <p>Dine filer er dine egne. De er knyttet til din private konto og deles aldrig med andre. Du har fuld kontrol.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-film"></i> Automatisk Magi</h3>
+                        <p>Navngiv dine filer simpelt (f.eks. "Inception (2010).mp4"), og vi henter automatisk flotte plakater og info.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-tv"></i> Serie-elsker? Intet Problem</h3>
+                        <p>Systemet genkender filnavne som "Serie S01E01.mp4" og grupperer dem automatisk i serier med afsnitslister.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-history"></i> Fortsæt Hvor Du Slap</h3>
+                        <p>Watch To Go husker præcis, hvor du er kommet til i en film eller et afsnit, så du nemt kan fortsætte senere.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3><i class="fas fa-gift"></i> Helt Gratis. Helt Uden Reklamer.</h3>
+                        <p>Du får plads til 100 filer (både film og afsnit) uden at betale en krone, og vi vil aldrig afbryde dig med reklamer.</p>
+                    </div>
+                     <div class="feature-card">
+                        <h3><i class="fas fa-lock"></i> Sikkerhed & Privatliv</h3>
+                        <p>Din streaming er privat. Vi logger kun, hvad der er nødvendigt for, at "Fortsæt med at se" virker for dig.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="faq-section">
+             <div class="faq-container">
+                <h2>Ofte Stillede Spørgsmål</h2>
+                <div class="faq-grid">
+                    <details class="faq-item">
+                        <summary>Hvad koster Watch To Go?</summary>
+                        <p>Watch To Go er helt gratis at bruge. Du får en personlig konto med plads til op til 100 filer, som kan være en blanding af film og TV-serie afsnit.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Hvilke filformater kan jeg uploade?</summary>
+                        <p>Vi anbefaler .mp4-filer for den bedste kompatibilitet. Systemet understøtter også .mkv og andre gængse formater. Under upload bliver alle filer optimeret til streaming, så de virker på alle enheder.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Er mine filer sikre og private?</summary>
+                        <p>Ja. Dine filer er kun tilgængelige, når du er logget ind på din konto. De er ikke synlige for andre brugere, og vi deler aldrig dine data.</p>
+                    </details>
+                    <details class="faq-item">
+                        <summary>Kan jeg se mine film på mit TV?</summary>
+                        <p>Ja! Så længe dit TV har en moderne webbrowser, kan du logge ind og streame direkte. Det virker også perfekt med Chromecast, Apple AirPlay eller ved at forbinde en computer til dit TV.</p>
+                    </details>
+                     <details class="faq-item">
+                        <summary>Hvad sker der, når jeg rammer grænsen på 100 filer?</summary>
+                        <p>Når du har 100 filer i dit bibliotek, vil du få en besked, når du forsøger at uploade en ny. For at få plads skal du blot slette en gammel film eller et afsnit, du ikke længere ser.</p>
+                    </details>
+                </div>
+             </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2>Klar til at bygge dit bibliotek?</h2>
+                <p>Gratis. Uden reklamer. Dit helt eget.</p>
+                <a href="{{ url_for('register') }}" class="btn btn-large">Kom i gang på 30 sekunder</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="landing-footer">
+        <p>Watch To Go - Din personlige streamingtjeneste.</p>
+        <a href="#" target="_blank">Se projektet på GitHub & Self-Host</a>
+    </footer>
+</body>
+</html>

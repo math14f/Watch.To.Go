@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dit Bibliotek - Watch To Go</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- Detalje & Afspiller Modal (Med simplificeret afspiller) -->
+    <div id="details-modal" class="modal-overlay">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <span id="close-modal" class="close-btn">&times;</span>
+            <!-- Info-sektion (uændret) -->
+            <div id="modal-body" class="modal-body">
+                <img id="modal-poster" src="" alt="Plakat">
+                <div class="modal-info">
+                    <h2 id="modal-title"></h2>
+                    <p id="modal-overview"></p>
+                    <button id="modal-play-btn" class="btn btn-large"><i class="fas fa-play"></i> Afspil</button>
+                    <div id="episode-list-container"></div>
+                </div>
+            </div>
+            <!-- Afspiller-sektion (SIMPLIFICERET) -->
+            <div id="player-container" class="player-container">
+                <video id="video-player" controls controlsList="nodownload"></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Navigation (uændret) -->
+    <nav class="main-nav">
+        <a href="{{ url_for('index') }}" class="nav-logo">Watch To Go</a>
+        <div class="nav-search">
+            <input type="text" id="search-input" placeholder="Søg i dit bibliotek...">
+        </div>
+        <div class="nav-user">
+            <span>Velkommen, <strong>{{ current_user.username }}</strong></span>
+            <a href="{{ url_for('logout') }}" class="btn btn-secondary">Log ud</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Resten af siden (Upload, rækker, gitter) er helt uændret -->
+        <!-- ... [Indsæt resten af din library.html fra V4.2 her] ... -->
+        <section class="upload-section card">
+            <h2><i class="fas fa-upload"></i> Upload en ny fil</h2>
+            <p>Vi genkender film ('Titel (År).mp4') og TV-serier ('Serie S01E01.mp4').</p>
+            <p class="upload-limit-info">Du bruger <strong>{{ current_file_count }} / {{ limit }}</strong> pladser.</p>
+            <form id="upload-form">
+                <input type="file" id="file-input" name="file" accept="video/mp4,video/mkv,video/x-m4v" required>
+                <button type="submit" class="btn">Start Upload</button>
+            </form>
+            <div id="upload-status" class="upload-status"></div>
+        </section>
+        {% if continue_watching %}
+        <section class="media-row">
+            <h2>Fortsæt med at se</h2>
+            <div class="row-content">
+                {% for item, progress in continue_watching %}
+                    {% if item.__class__.__name__ == 'Movie' %}
+                        {% set progress_percent = (progress.resume_position / item.duration * 100) if item.duration and item.duration > 0 else 0 %}
+                        <div class="media-card" data-media-type="movie" data-media-id="{{ item.id }}" data-title="{{ item.title }}" data-overview="{{ item.overview or '' }}" data-poster="{{ item.poster_path }}" data-resume="{{ progress.resume_position }}">
+                            <div class="card-poster" style="background-image: url('{{ item.poster_path or '' }}');">
+                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: {{ progress_percent }}%;"></div></div>
+                            </div>
+                            <div class="card-info"><h3 class="card-title">{{ item.title }}</h3></div>
+                        </div>
+                    {% elif item.__class__.__name__ == 'Episode' %}
+                        {% set progress_percent = (progress.resume_position / item.duration * 100) if item.duration and item.duration > 0 else 0 %}
+                        <div class="media-card" data-media-type="episode" data-media-id="{{ item.id }}" data-title="{{ item.show.title }}" data-overview="{{ item.show.overview or '' }}" data-poster="{{ item.show.poster_path }}" data-resume="{{ progress.resume_position }}">
+                            <div class="card-poster" style="background-image: url('{{ item.show.poster_path or '' }}');">
+                                <div class="play-icon"><i class="fas fa-play"></i></div>
+                                <div class="progress-bar-container"><div class="progress-bar" style="width: {{ progress_percent }}%;"></div></div>
+                            </div>
+                            <div class="card-info"><h3 class="card-title">{{ item.show.title }}</h3><p class="card-subtitle">S{{ '%02d'|format(item.season_number) }}E{{ '%02d'|format(item.episode_number) }}</p></div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% if recently_added_movies %}
+        <section class="media-row">
+            <h2>Nyligt Tilføjede Film</h2>
+            <div class="row-content">
+                {% for item in recently_added_movies %}
+                <div class="media-card" data-media-type="movie" data-media-id="{{ item.id }}" data-title="{{ item.title }}" data-overview="{{ item.overview or '' }}" data-poster="{{ item.poster_path }}" data-resume="0">
+                    <div class="card-poster" style="background-image: url('{{ item.poster_path or '' }}');"><div class="play-icon"><i class="fas fa-info-circle"></i></div></div>
+                    <div class="card-info"><h3 class="card-title">{{ item.title }}</h3></div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        {% if recently_added_shows %}
+        <section class="media-row">
+            <h2>Nyligt Tilføjede Serier</h2>
+            <div class="row-content">
+                {% for show in recently_added_shows %}
+                <div class="media-card" data-media-type="tvshow" data-media-id="{{ show.id }}" data-title="{{ show.title }}" data-overview="{{ show.overview or '' }}" data-poster="{{ show.poster_path }}">
+                    <div class="card-poster" style="background-image: url('{{ show.poster_path or '' }}');"><div class="play-icon"><i class="fas fa-list"></i></div></div>
+                    <div class="card-info"><h3 class="card-title">{{ show.title }}</h3></div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+        <section class="library-section">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="movies">Alle Film</button>
+                <button class="tab-btn" data-tab="tvshows">Alle TV-Serier</button>
+            </div>
+            <div id="movies-grid" class="media-grid tab-content active">
+                {% for item in all_movies %}
+                <div class="media-card" data-media-type="movie" data-media-id="{{ item.id }}" data-title="{{ item.title }}" data-overview="{{ item.overview or '' }}" data-poster="{{ item.poster_path }}" data-resume="0">
+                    <div class="card-poster" style="background-image: url('{{ item.poster_path or '' }}');"><div class="play-icon"><i class="fas fa-info-circle"></i></div></div>
+                    <div class="card-info"><h3 class="card-title">{{ item.title }}</h3></div>
+                </div>
+                {% endfor %}
+            </div>
+            <div id="tvshows-grid" class="media-grid tab-content">
+                {% for show in all_tv_shows %}
+                <div class="media-card" data-media-type="tvshow" data-media-id="{{ show.id }}" data-title="{{ show.title }}" data-overview="{{ show.overview or '' }}" data-poster="{{ show.poster_path }}">
+                    <div class="card-poster" style="background-image: url('{{ show.poster_path or '' }}');"><div class="play-icon"><i class="fas fa-list"></i></div></div>
+                    <div class="card-info"><h3 class="card-title">{{ show.title }}</h3></div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

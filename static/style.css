@@ -1,0 +1,125 @@
+/* ==============================================================================
+ * style.css - V4.3 MED BROWSERENS INDBYGGEDE AFSPILLER
+ * ============================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --bg-dark: #10141f;
+    --bg-light: #161d2f;
+    --primary: #fc4747;
+    --text-light: #ffffff;
+    --text-grey: #b0b8d0;
+    --border-color: #5a698f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    margin: 0;
+}
+a { color: var(--primary); text-decoration: none; }
+.container { max-width: 95%; margin: 0 auto; padding: 2rem 0; }
+.card { background-color: var(--bg-light); border-radius: 12px; padding: 2rem; margin-bottom: 2rem; }
+.btn { background-color: var(--primary); color: var(--text-light); border: none; padding: 12px 24px; border-radius: 5px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s, transform 0.2s; }
+.btn:hover { background-color: #ff7a7a; transform: translateY(-2px); }
+.btn-secondary { background-color: var(--border-color); }
+
+/* ================== LANDING PAGE STYLES ================== */
+.landing-page { padding-top: 0; }
+.landing-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; position: absolute; top: 0; left: 0; width: 100%; z-index: 10; }
+.nav-logo { font-size: 1.8rem; font-weight: bold; color: var(--primary); }
+.hero { min-height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center; background: linear-gradient(rgba(16, 20, 31, 0.85), rgba(16, 20, 31, 1)), url(https://images.unsplash.com/photo-1574267432553-4b4628081c31?auto=format&fit=crop&w=1200) no-repeat center center/cover; padding: 0 20px; }
+.hero-content { max-width: 700px; animation: fadeIn 1s ease-out; }
+.hero h1 { font-size: 3.5rem; font-weight: 700; margin-bottom: 1rem; }
+.hero .subtitle { font-size: 1.3rem; color: var(--text-grey); line-height: 1.6; }
+.btn-large { font-size: 1.2rem; padding: 15px 30px; margin-top: 2rem; }
+.info-section, .features-section, .faq-section, .cta-section { padding: 5rem 5%; text-align: center; }
+.info-section h2, .features-section h2, .faq-section h2, .cta-section h2 { font-size: 2.5rem; margin-bottom: 3rem; }
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.step-card { background-color: var(--bg-light); padding: 2rem; border-radius: 8px; }
+.step-card i { font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
+.step-card h3 { font-size: 1.5rem; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; text-align: left; }
+.feature-card { background-color: var(--bg-light); padding: 2rem; border-radius: 8px; }
+.feature-card h3 { font-size: 1.3rem; display: flex; align-items: center; gap: 0.75rem; }
+.feature-card h3 i { color: var(--primary); }
+.faq-container, .features-container, .info-container { max-width: 900px; margin: 0 auto; }
+.faq-grid { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+.faq-item { background-color: var(--bg-light); border-radius: 8px; overflow: hidden; }
+.faq-item summary { font-size: 1.2rem; font-weight: 500; padding: 1.5rem; cursor: pointer; position: relative; }
+.faq-item summary::after { content: '+'; position: absolute; right: 1.5rem; font-size: 1.5rem; transition: transform 0.2s; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p { padding: 0 1.5rem 1.5rem; color: var(--text-grey); line-height: 1.6; }
+.cta-section { background-color: var(--bg-light); }
+.landing-footer { text-align: center; padding: 2rem; color: var(--text-grey); }
+
+/* ================== AUTH PAGE STYLES ================== */
+.auth-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.auth-box { background-color: var(--bg-light); padding: 40px; border-radius: 12px; width: 100%; max-width: 400px; text-align: center; position: relative; }
+.back-to-home { position: absolute; top: 20px; left: 20px; color: var(--text-grey); font-size: 0.9rem; }
+.back-to-home i { margin-right: 0.5rem; }
+.form-group { margin-bottom: 1.5rem; text-align: left; }
+.form-group label { display: block; margin-bottom: 0.5rem; }
+.form-group input { width: 100%; padding: 12px; background-color: var(--border-color); border: 1px solid #505050; color: var(--text-light); border-radius: 5px; }
+.switch-auth { margin-top: 1.5rem; }
+.alert { padding: 1rem; margin-bottom: 1rem; border-radius: 5px; } .alert-danger { background-color: #a01c1c; } .alert-success { background-color: #1ca03b; }
+
+/* ================== BIBLIOTEK STYLES ================== */
+body:not(.landing-page) { padding-top: 80px; }
+.main-nav { position: fixed; top: 0; left: 0; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2.5%; background-color: rgba(16, 20, 31, 0.7); backdrop-filter: blur(10px); z-index: 100; border-bottom: 1px solid #1f2a40; }
+.nav-search input { background-color: var(--bg-light); border: 1px solid var(--border-color); color: var(--text-light); padding: 10px 15px; border-radius: 5px; width: 300px; font-family: 'Poppins', sans-serif; }
+.nav-user { display: flex; align-items: center; gap: 1.5rem; }
+
+/* Horisontale Rækker */
+.media-row { margin-bottom: 3rem; }
+.media-row h2 { font-size: 1.6rem; margin-bottom: 1.2rem; padding-left: 2.5%; }
+.row-content { display: flex; gap: 20px; overflow-x: auto; padding: 0 2.5% 1.5rem; scrollbar-width: none; -ms-overflow-style: none; scroll-snap-type: x mandatory; }
+.row-content::-webkit-scrollbar { display: none; }
+.media-card { flex-shrink: 0; width: 220px; border-radius: 8px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; scroll-snap-align: start; }
+.media-card:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+.card-poster { width: 100%; padding-top: 150%; background-color: var(--bg-light); background-size: cover; background-position: center; position: relative; display: flex; justify-content: center; align-items: center; border-radius: 8px; }
+.card-poster .play-icon { font-size: 3rem; color: rgba(255,255,255,0.8); opacity: 0; transition: opacity 0.3s; transform: scale(0.8); }
+.media-card:hover .play-icon { opacity: 1; transform: scale(1); }
+.card-info { padding-top: 0.75rem; position: relative; }
+.card-title { font-size: 1.1rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+.card-subtitle { font-size: 0.9rem; color: var(--text-grey); }
+.progress-bar-container { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background-color: rgba(255,255,255,0.2); border-radius: 0 0 8px 8px; }
+.progress-bar { height: 100%; background-color: var(--primary); }
+.watched-tick { position: absolute; top: 10px; right: 10px; color: var(--primary); background-color: rgba(0,0,0,0.6); width: 28px; height: 28px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1rem; }
+
+/* Bibliotek (Gitter-layout til faner) */
+.library-section { margin-top: 3rem; }
+.tabs { margin: 3rem 0 1.5rem; padding-left: 2.5%; border-bottom: 1px solid var(--border-color); }
+.tab-btn { background: none; border: none; color: var(--text-grey); padding: 1rem; font-size: 1.2rem; cursor: pointer; border-bottom: 3px solid transparent; }
+.tab-btn.active { color: var(--text-light); border-bottom-color: var(--primary); }
+.tab-content { display: none; } .tab-content.active { display: grid; }
+.media-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; padding: 0 2.5%; }
+
+/* Detalje Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; }
+.modal-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; filter: blur(20px) brightness(0.3); transform: scale(1.1); }
+.modal-content { position: relative; background-color: transparent; width: 90%; max-width: 900px; max-height: 90vh; display: flex; flex-direction: column; animation: fadeIn 0.3s; }
+.close-btn { position: absolute; top: 0; right: 0; font-size: 35px; cursor: pointer; color: var(--text-grey); z-index: 1001; background: var(--bg-light); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; line-height: 1; }
+.modal-body { display: flex; gap: 2rem; padding: 2rem 0; overflow-y: auto; }
+#modal-poster { width: 300px; max-width: 35%; border-radius: 8px; align-self: flex-start; }
+#modal-title { font-size: 2.5rem; font-weight: 600; }
+#modal-overview { line-height: 1.6; color: var(--text-grey); margin-top: 1rem; }
+#episode-list { list-style: none; padding: 0; margin-top: 1.5rem; max-height: 250px; overflow-y: auto; }
+.episode-item { display: flex; align-items: center; padding: 0.75rem; border-radius: 5px; cursor: pointer; position: relative; }
+.episode-item:hover { background-color: var(--bg-dark); }
+.episode-number { color: var(--text-grey); width: 80px; }
+.episode-info { flex-grow: 1; }
+.delete-btn, .delete-btn-ep { background: none; border: none; color: var(--text-grey); cursor: pointer; font-size: 1rem; transition: color 0.2s; }
+.delete-btn-ep { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); }
+.delete-btn:hover, .delete-btn-ep:hover { color: var(--primary); }
+.progress-bar-container-ep { height: 3px; background: rgba(255,255,255,0.2); margin-top: 5px; } .progress-bar-ep { height: 100%; background: var(--primary); }
+.watched-tick-ep { color: var(--primary); font-size: 0.9rem; margin-left: 10px; }
+
+/* Standard Video Player Styling */
+.player-container { display: none; width: 100%; background-color: black; padding: 2rem 0; }
+#video-player { width: 100%; max-height: 80vh; display: block; border-radius: 5px; }
+
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }

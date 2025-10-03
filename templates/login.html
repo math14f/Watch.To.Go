@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MiniPlex</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+          <a href="{{ url_for('index') }}" class="back-to-home"><i class="fas fa-arrow-left"></i> Tilbage til forsiden</a>
+            <h1>Log Ind</h1>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="POST" action="">
+                <div class="form-group">
+                    <label for="username">Brugernavn</label>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Adgangskode</label>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <button type="submit" class="btn">Log Ind</button>
+            </form>
+            <div class="switch-auth">
+                Har du ikke en konto? <a href="{{ url_for('register') }}">Opret en her</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
