@@ -15,7 +15,7 @@ from flask_bcrypt import Bcrypt
 from sqlalchemy import desc
 
 # --- KONFIGURATION ---
-TMDB_API_KEY = "b3edf66f42b954dc3b97074aa9bec670"
+TMDB_API_KEY = "DIN_TMDB_API_NØGLE_HER"
 
 if TMDB_API_KEY == "DIN_TMDB_API_NØGLE_HER":
     print("\n\n!!! ADVARSEL: Du mangler at indsætte din TMDB API-nøgle i app.py !!!\n\n")
